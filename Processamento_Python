@@ -1,0 +1,53 @@
+saldo = 0
+deposito = 0
+saque = 0
+extrato = deposito - saque
+numero_saque = 0
+limite_saque = 3
+lista_deposito = []
+lista_saque = []
+
+def menu():
+    print("\nMenu:")
+    print("\n[d] Depósito")
+    print("\n[s] Saque")
+    print("\n[e] Extrato")
+    print("\n[q] Sair")
+    print("\nMenu:")
+
+
+while True:
+    menu()
+    opcao = (input("Selecione sua opção: "))
+    if opcao == "d":
+        deposito = float(input("digite o valor do depósito: "))
+        if deposito > 0:
+            lista_deposito.append(f"{deposito:.2f}")
+            saldo += deposito
+            print("Depósito realizado com sucesso")
+        else:
+            print ("Valor não aceito. O depósito deve ser superior a 0 (zero)") 
+    elif opcao == "s":
+        saque = float(input("Informe o valor desejado para saque: "))
+        if saldo >= saque:
+            if numero_saque <= 2:
+                if saque <= 500:
+                    lista_saque.append(f"{saque:.2f}")
+                    saldo -= saque
+                    numero_saque += 1
+                    print(f"Você tem direito a mais {3 - numero_saque} saque(s) hoje. Limite diário: {numero_saque}/3")        
+                else:
+                    print ("Valor limite por saque é de R$ 500,00")
+            else:
+                print("Você atingiu o número limite de saques hoje. Volte amanhã.")
+        else:
+            print("Você não tem saldo suficiente pra realizar essa operação.")            
+    elif opcao == "e":
+        print(f"Seus depósitos R$: {lista_deposito}")
+        print(f"Seus saques R$: {lista_saque}")
+        print(f"Seu saldo é de R$: {saldo:.2f}")
+    elif opcao == "q":
+        print("Obrigado por usar nossos serviços")
+        break
+    else:
+        print("Opção inválida... \nuse apenas: \ns para Saque\nd para Depósito\ne para Extrato \nq para Sair.")
